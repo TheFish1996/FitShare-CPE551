@@ -1,0 +1,37 @@
+[
+    {   
+        "id": 0,
+        "name": "Yoga",
+        "instructor": "Jon",
+        "price": "$10",
+        "picture": ""
+    },
+    {
+        "id": 1,
+        "name": "Acro",
+        "instructor": "Omar",
+        "price": "$15",
+        "picture": ""
+    },
+    {
+        "id": 2,
+        "name": "Weights",
+        "instructor": "Eakrum",
+        "price": "$20",
+        "picture": ""
+    },
+    {
+        "id": 3,
+        "name": "Cycling",
+        "instructor": "Jon",
+        "price": "$25",
+        "picture": ""
+    },
+    {
+        "id": 4,
+        "name": "Gymnastics",
+        "instructor": "Omar",
+        "price": "$30",
+        "picture": ""
+    }
+]
