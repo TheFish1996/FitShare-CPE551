@@ -15,7 +15,6 @@ class HomePage extends Component {
   render() {
     return (
       <>
-        <Navbar />
         <Container fluid>
           <Row>
             <Col sm="12" md="12">

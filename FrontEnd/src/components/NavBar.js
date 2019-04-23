@@ -13,6 +13,8 @@ import {
   DropdownItem
 } from "reactstrap";
 
+import {Link} from "react-router-dom"
+
 
 export default class NavBar extends React.Component {
   constructor(props) {
@@ -36,12 +38,12 @@ export default class NavBar extends React.Component {
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink href="https://github.com/eawwal/">
+              <NavLink href="/sponsoredPrograms">
                 Sponsored Programs
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="https://github.com/eawwal/">All Programs</NavLink>
+              <NavLink href="/allPrograms">All Programs</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="https://github.com/eawwal/">

@@ -22,7 +22,6 @@ class SponsoredPrograms extends Component {
     render() {
         return (
             <div>
-                <Navbar />
                 <Container fluid>
                     <Row>
                     {this.state.sponsoredProgramData.map((item, index) => {
