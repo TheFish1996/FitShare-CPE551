@@ -2,8 +2,9 @@
 
 from flask import Blueprint, jsonify
 from bson import json_util
-import json
 
+import json
+import awsS3
 import index
 
 fitShare_api = Blueprint('fitshare_api', __name__)
@@ -35,5 +36,13 @@ def getSponsoredPrograms():
     for document in output:
         newDoc = json.loads(json_util.dumps(document))
         response.append(newDoc)
-    
+
     return jsonify(response)
+
+
+@fitShare_api.route("/api/upload")
+def uploader():
+    f = open("test2.txt")
+    awsS3.uploadFile("test2.txt", f)
+    f.close()
+    return "done"
