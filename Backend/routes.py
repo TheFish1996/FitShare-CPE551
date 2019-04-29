@@ -1,6 +1,6 @@
 # file that holds all the routes of the API
 
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from bson import json_util
 
 import json
@@ -40,9 +40,12 @@ def getSponsoredPrograms():
     return jsonify(response)
 
 
-@fitShare_api.route("/api/upload")
+@fitShare_api.route("/api/upload", methods=['POST'])
 def uploader():
-    f = open("test2.txt")
-    awsS3.uploadFile("test2.txt", f)
-    f.close()
+    print "hit route"
+    if 'file' not in request.files:
+        print "no file part"
+    else:
+        file = request.files['file']
+        awsS3.uploadFile(file.filename, file)
     return "done"
