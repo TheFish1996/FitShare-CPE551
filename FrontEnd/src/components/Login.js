@@ -10,8 +10,16 @@ import {
   FormText,
   FormFeedback
 } from "reactstrap";
+import {connect} from "react-redux";
 import Navbar from "./NavBar";
 import "../styles/App.css";
+
+const mapStateToProps = (state) => {
+    return {
+      emailAdress: state.userInformation.emailAdress,
+      password: state.userInformation.password
+    };
+  };
 
 class LogIn extends Component {
   constructor(props) {
@@ -25,7 +33,7 @@ class LogIn extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
   }
-
+  
   validateEmail(e) {
     const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const { validate } = this.state;
@@ -53,6 +61,7 @@ class LogIn extends Component {
 
   render() {
     const { email, password } = this.state;
+    const { emailAdress} = this.props
     return (
       <div>
         <Container fluid className="App">
@@ -66,7 +75,7 @@ class LogIn extends Component {
                   name="email"
                   id="exampleEmail"
                   placeholder="name@example.com"
-                  value={email}
+                  value={emailAdress}
                   valid={this.state.validate.emailState === "has-success"}
                   invalid={this.state.validate.emailState === "has-danger"}
                   onChange={e => {
@@ -101,4 +110,7 @@ class LogIn extends Component {
   }
 }
 
-export default LogIn;
+export default connect(
+    mapStateToProps,
+    null
+)(LogIn);

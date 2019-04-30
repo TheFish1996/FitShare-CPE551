@@ -2,8 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom"
 import {CookiesProvider} from "react-cookie"
+import { Provider } from "react-redux"
 import "bootstrap/dist/css/bootstrap.css";
 import "./styles/styles.scss";
+import store from "./store"
 
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
@@ -11,7 +13,9 @@ import * as serviceWorker from "./serviceWorker";
 ReactDOM.render((
     <CookiesProvider>
         <BrowserRouter>
-            <App />
+            <Provider store={store}>
+                <App />
+            </Provider>
         </BrowserRouter>
     </CookiesProvider>
 ), document.getElementById("root"));
