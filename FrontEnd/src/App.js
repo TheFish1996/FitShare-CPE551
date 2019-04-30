@@ -7,14 +7,14 @@ import SponsoredPrograms from "./components/SponsoredPrograms";
 import AllPrograms from "./components/AllPrograms";
 import Navbar from "./components/NavBar";
 import Upload from "./components/Upload";
-import Authentication from "./components/Authentication";
+import LogIn from "./components/Login";
 
 class App extends Component {
   render() {
     return (
       <div>
         <Switch>
-          <Route exact path="/" component={Authentication} />
+          <Route exact path="/" component={LogIn} />
           <Route path="/sponsoredPrograms" component={SponsoredPrograms} />
           <Route path="/allPrograms" component={AllPrograms} />
         </Switch>
