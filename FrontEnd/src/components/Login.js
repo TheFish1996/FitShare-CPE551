@@ -12,6 +12,7 @@ import {
 } from "reactstrap";
 import {connect} from "react-redux";
 import "../styles/App.css";
+import { Redirect } from "react-router-dom";
 
 const mapStateToProps = (state) => {
     return {
@@ -59,8 +60,12 @@ class LogIn extends Component {
 
   render() {
     const { email, password } = this.state;
+    const {loggedIn} = this.props
     return (
       <div>
+        {loggedIn && 
+            <Redirect to="/home" />
+        } 
         <Container fluid className="App">
           <h2>Sign In</h2>
           <Form className="form" onSubmit={e => this.submitForm(e)}>

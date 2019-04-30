@@ -1,10 +1,17 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "reactstrap";
-
+import { Redirect } from "react-router-dom";
+import {connect} from "react-redux";
 import Navbar from "./NavBar";
 import ProgramCard from "./ProgramCard"
 
 const fakeData = require('../API/test.json') //fakedata used to just populate for now
+
+const mapStateToProps = (state) => {
+    return {
+      loggedIn: state.userInformation.loginSuccess
+    };
+  };
 
 class SponsoredPrograms extends Component {
     constructor(props){
@@ -20,8 +27,12 @@ class SponsoredPrograms extends Component {
     }
 
     render() {
+        const {loggedIn} = this.props
         return (
             <div>
+                {!loggedIn && 
+                    <Redirect to="/" />
+                }
                 <Navbar />
                 <Container fluid>
                     <Row>
@@ -39,5 +50,7 @@ class SponsoredPrograms extends Component {
     }
 }
 
-
-export default SponsoredPrograms
+export default connect(
+    mapStateToProps,
+    null
+  )(SponsoredPrograms);
