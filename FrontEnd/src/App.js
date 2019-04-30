@@ -8,6 +8,7 @@ import AllPrograms from "./components/AllPrograms";
 import Navbar from "./components/NavBar";
 import Upload from "./components/Upload";
 import LogIn from "./components/Login";
+import Register from "./components/Register";
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
       <div>
         <Switch>
           <Route exact path="/" component={LogIn} />
+          <Route exact path="/register" component={Register} />
           <Route path="/sponsoredPrograms" component={SponsoredPrograms} />
           <Route path="/allPrograms" component={AllPrograms} />
         </Switch>

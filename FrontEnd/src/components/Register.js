@@ -10,15 +10,16 @@ import {
   FormText,
   FormFeedback
 } from "reactstrap";
-import Navbar from "./NavBar";
+
 import "../styles/App.css";
 
-class LogIn extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
       password: "",
+      name: "",
       validate: {
         emailState: ""
       }
@@ -52,12 +53,31 @@ class LogIn extends Component {
   }
 
   render() {
-    const { email, password } = this.state;
+    const { email, password, name } = this.state;
+
     return (
       <div>
         <Container fluid className="App">
-          <h2>Sign In</h2>
+          <h2>Register</h2>
           <Form className="form" onSubmit={e => this.submitForm(e)}>
+            <Col>
+              <FormGroup>
+                <Label>Full Name</Label>
+                <Input
+                  placeholder="John Appleseed"
+                  type="name"
+                  name="name"
+                  value={name}
+                  onChange={e => {
+                    this.handleChange(e);
+                  }}
+                />
+                <FormFeedback valid />
+                <FormFeedback>
+                  Enter a properly formatted email address
+                </FormFeedback>
+              </FormGroup>
+            </Col>
             <Col>
               <FormGroup>
                 <Label>Email</Label>
@@ -74,10 +94,9 @@ class LogIn extends Component {
                     this.handleChange(e);
                   }}
                 />
-                <FormFeedback valid>
-                </FormFeedback>
+                <FormFeedback valid />
                 <FormFeedback>
-                    Enter a properly formatted email address
+                  Enter a properly formatted email address
                 </FormFeedback>
               </FormGroup>
             </Col>
@@ -101,4 +120,4 @@ class LogIn extends Component {
   }
 }
 
-export default LogIn;
+export default Register;
