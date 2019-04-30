@@ -1,9 +1,16 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "reactstrap";
-
+import { Redirect } from "react-router-dom";
+import {connect} from "react-redux";
 import Navbar from "./NavBar";
 import Carousel from "./Carousel";
 import Card from "./Card";
+
+const mapStateToProps = (state) => {
+  return {
+    loggedIn: state.userInformation.loginSuccess
+  };
+};
 
 class HomePage extends Component {
   constructor(props) {
@@ -13,8 +20,13 @@ class HomePage extends Component {
   }
 
   render() {
+    const {loggedIn} = this.props
     return (
       <>
+        {!loggedIn && 
+          <Redirect to="/" />
+        }
+        <Navbar />
         <Container fluid>
           <Row>
             <Col sm="12" md="12">
@@ -39,4 +51,7 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage;
+export default connect(
+  mapStateToProps,
+  null
+)(HomePage);

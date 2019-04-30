@@ -22,6 +22,7 @@ class AllPrograms extends Component {
     render() {
         return (
             <div>
+                <Navbar />
                 <Container fluid>
                     <Row>
                     {this.state.AllProgramData.map((item, index) => {

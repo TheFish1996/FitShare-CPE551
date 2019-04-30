@@ -11,7 +11,6 @@ import {
   FormFeedback
 } from "reactstrap";
 import {connect} from "react-redux";
-import Navbar from "./NavBar";
 import "../styles/App.css";
 
 const mapStateToProps = (state) => {
