@@ -25,7 +25,7 @@ class LogIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
+      email: this.props.emailAdress,
       password: "",
       validate: {
         emailState: ""
@@ -61,7 +61,6 @@ class LogIn extends Component {
 
   render() {
     const { email, password } = this.state;
-    const { emailAdress} = this.props
     return (
       <div>
         <Container fluid className="App">
@@ -75,7 +74,7 @@ class LogIn extends Component {
                   name="email"
                   id="exampleEmail"
                   placeholder="name@example.com"
-                  value={emailAdress}
+                  value={email}
                   valid={this.state.validate.emailState === "has-success"}
                   invalid={this.state.validate.emailState === "has-danger"}
                   onChange={e => {

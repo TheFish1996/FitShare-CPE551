@@ -1,5 +1,5 @@
 const userData = {
-    emailAdress: "",
+    emailAdress: "Email Adress",
     password: "",
     loginSuccess: false
 }
