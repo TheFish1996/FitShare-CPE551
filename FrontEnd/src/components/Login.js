@@ -16,8 +16,7 @@ import "../styles/App.css";
 
 const mapStateToProps = (state) => {
     return {
-      emailAdress: state.userInformation.emailAdress,
-      password: state.userInformation.password
+      loggedIn: state.userInformation.loginSuccess
     };
   };
 
@@ -25,7 +24,7 @@ class LogIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: this.props.emailAdress,
+      email: "",
       password: "",
       validate: {
         emailState: ""
