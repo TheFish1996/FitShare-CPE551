@@ -9,6 +9,7 @@ import Navbar from "./components/NavBar";
 import Upload from "./components/Upload";
 import LogIn from "./components/Login";
 import Register from "./components/Register";
+import DiscoverTrainers from "./components/DiscoverTrainers"
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
           <Route exact path="/register" component={Register} />
           <Route path="/sponsoredPrograms" component={SponsoredPrograms} />
           <Route path="/allPrograms" component={AllPrograms} />
+          <Route path="/discoverTrainers" component={DiscoverTrainers} />
         </Switch>
       </div>
     );
