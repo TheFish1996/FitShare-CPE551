@@ -23,7 +23,9 @@ class AllPrograms extends Component {
 
 
     componentDidMount(){        //whenever mounted it should fetch the new data
-        console.log(this.state.AllProgramData)
+        if(this.props.loggedIn){
+            console.log(this.state.AllProgramData)
+        }
     }
 
     render() {
@@ -34,7 +36,7 @@ class AllPrograms extends Component {
                     <Redirect to="/" />
                 } 
                 <Navbar />
-                <Container fluid>
+                <Container fluid className="Programs">
                     <Row>
                     {this.state.AllProgramData.map((item, index) => {
                         return (

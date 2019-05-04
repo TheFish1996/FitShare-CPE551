@@ -1,7 +1,6 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {Container, Row, Col, Button} from "reactstrap"
 import Navbar from "./NavBar";
-import ProgramCard from "./ProgramCard"
 import TrainerCard from "./TrainerCard"
 import {connect} from "react-redux";
 
@@ -18,10 +17,12 @@ function DiscoverTrainer(props){
     const [trainerName, setTrainerName] = useState("Name")  //setTrainerName acts as a this.setState, use 'useMergeState' if you want to combine muliple states
     const [trainerData, setTrainerData] = useState(fakeData)
 
-    console.log(props.loggedIn)     //redux still stays outside even though its a react
+    console.log(props.loggedIn)                             //redux still stays outside even though its a react hoook
 
-    useEffect(() => {                       //replaces 'componentDidMount'
-        console.log('Component Mounted!')
+    useEffect(() => {                                       //replaces 'componentDidMount'
+        if(props.loggedIn){
+            console.log('Component Mounted!')               //will set trainer data if logged in
+        }                                      
     })
 
     return (

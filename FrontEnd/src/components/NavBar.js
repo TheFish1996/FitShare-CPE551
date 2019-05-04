@@ -46,7 +46,7 @@ export default class NavBar extends React.Component {
               <NavLink href="/allPrograms">All Programs</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="https://github.com/eawwal/">
+              <NavLink href="/discoverTrainers">
                 Discover Trainers
               </NavLink>
             </NavItem>
@@ -55,7 +55,7 @@ export default class NavBar extends React.Component {
                 Account
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem>View Profile</DropdownItem>
+                <DropdownItem href="/profile">View Profile</DropdownItem>
                 <DropdownItem>Share Your Plan</DropdownItem>
                 <DropdownItem>Purchased Plans</DropdownItem>
                 <DropdownItem divider />

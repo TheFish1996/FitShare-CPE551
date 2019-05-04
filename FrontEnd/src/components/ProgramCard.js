@@ -21,7 +21,7 @@ class ProgramCard extends Component {
     render() {
         return (
             <div>
-                <Card>
+                <Card className="ProgramsCard">
                     <CardImg top width="100%" src={pic} alt="Card image cap" />
                     <CardBody>
                         <CardTitle>{this.props.item.name}</CardTitle>

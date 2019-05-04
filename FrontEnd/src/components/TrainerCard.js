@@ -13,7 +13,7 @@ function TrainerCard (props) {
 
     return (
         <div>
-            <Card outline color="info">
+            <Card outline color="info" className="TrainerCard">
                 <CardImg top width="100%" src={pic} alt="Card image cap" />
                 <CardBody>
                     <CardTitle>{props.item.name}</CardTitle>

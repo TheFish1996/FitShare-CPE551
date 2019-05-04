@@ -10,6 +10,7 @@ import Upload from "./components/Upload";
 import LogIn from "./components/Login";
 import Register from "./components/Register";
 import DiscoverTrainers from "./components/DiscoverTrainers"
+import Profile from "./components/Profile"
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
           <Route path="/sponsoredPrograms" component={SponsoredPrograms} />
           <Route path="/allPrograms" component={AllPrograms} />
           <Route path="/discoverTrainers" component={DiscoverTrainers} />
+          <Route path="/profile" component={Profile} />
         </Switch>
       </div>
     );

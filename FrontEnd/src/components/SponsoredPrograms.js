@@ -22,8 +22,10 @@ class SponsoredPrograms extends Component {
     }
 
 
-    componentDidMount(){        //whenever mounted it should fetch the new data
-        console.log(this.state.sponsoredProgramData)
+    componentDidMount(){        //whenever mounted it should fetch the new data if we are logged in
+        if(this.props.loggedIn){
+            console.log(this.state.sponsoredProgramData)
+        }
     }
 
     render() {
@@ -34,7 +36,7 @@ class SponsoredPrograms extends Component {
                     <Redirect to="/" />
                 }
                 <Navbar />
-                <Container fluid>
+                <Container fluid className="Programs">
                     <Row>
                     {this.state.sponsoredProgramData.map((item, index) => {
                         return (
