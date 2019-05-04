@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useEffect } from "react";
 import {Container, Row, Col, Button} from "reactstrap"
 import Navbar from "./NavBar";
 import ProgramCard from "./ProgramCard"
@@ -19,6 +19,10 @@ function DiscoverTrainer(props){
     const [trainerData, setTrainerData] = useState(fakeData)
 
     console.log(props.loggedIn)     //redux still stays outside even though its a react
+
+    useEffect(() => {                       //replaces 'componentDidMount'
+        console.log('Component Mounted!')
+    })
 
     return (
         <div>
