@@ -1,0 +1,37 @@
+[
+    {   
+        "id": 0,
+        "name": "James",
+        "description": "This is a test description",
+        "courses": [],
+        "picture": ""
+    },
+    {
+        "id": 1,
+        "name": "James",
+        "description": "This is a test description",
+        "courses": [],
+        "picture": ""
+    },
+    {
+        "id": 2,
+        "name": "James",
+        "description": "This is a test description",
+        "courses": [],
+        "picture": ""
+    },
+    {
+        "id": 3,
+        "name": "James",
+        "description": "This is a test description",
+        "courses": [],
+        "picture": ""
+    },
+    {
+        "id": 4,
+        "name": "James",
+        "description": "This is a test description",
+        "courses": [],
+        "picture": ""
+    }
+]

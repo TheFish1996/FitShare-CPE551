@@ -40,3 +40,8 @@ button {
     transform: rotate(360deg);
   }
 }
+
+.Trainers {
+  margin-top: 75px;
+  border-radius:.25rem!important
+}
