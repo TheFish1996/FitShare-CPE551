@@ -57,11 +57,22 @@ def registerUser():
     data = request.get_json()
     response = aws.createUser(data['email'], data['password'])
 
-
     newUser['Full-Name'] = data['name']
     newUser['email'] = data['email']
     Users = index.mongo.db.Users
 
-    Users.insert_one({"_id": response, "email": data["email"], "name": data['name']})
+    Users.insert_one(
+        {"_id": response, "email": data["email"], "name": data['name']})
 
     return 'done'
+
+
+@fitShare_api.route("/api/autenticateUser", methods=['POST'])
+def authenticateUser():
+    data = request.get_json()
+    response = aws.authenticateUser(data['email'], data['password'])
+    Users = index.mongo.db.Users
+    doc = Users.find_one({"_id": response})
+    user = json.loads(json_util.dumps(doc))
+
+    return jsonify(user)

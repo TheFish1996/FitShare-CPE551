@@ -10,15 +10,15 @@ import {
   FormText,
   FormFeedback
 } from "reactstrap";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import "../styles/App.css";
 import { Redirect } from "react-router-dom";
 
-const mapStateToProps = (state) => {
-    return {
-      loggedIn: state.userInformation.loginSuccess
-    };
+const mapStateToProps = state => {
+  return {
+    loggedIn: state.userInformation.loginSuccess
   };
+};
 
 class LogIn extends Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class LogIn extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
   }
-  
+
   validateEmail(e) {
     const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const { validate } = this.state;
@@ -55,17 +55,31 @@ class LogIn extends Component {
 
   submitForm(e) {
     e.preventDefault();
-    console.log(`Email: ${this.state.email}`);
+    let data = {};
+    data["email"] = this.state.email;
+    data["password"] = this.state.password;
+    fetch("http://localhost:5000/api/autenticateUser", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data) {
+        let user = data; //this is where the server returns the user
+        console.log(user); //print user
+      });
   }
 
   render() {
     const { email, password } = this.state;
-    const {loggedIn} = this.props
+    const { loggedIn } = this.props;
     return (
       <div>
-        {loggedIn && 
-            <Redirect to="/home" />
-        } 
+        {loggedIn && <Redirect to="/home" />}
         <Container fluid className="App">
           <h2>Sign In</h2>
           <Form className="form" onSubmit={e => this.submitForm(e)}>
@@ -85,10 +99,9 @@ class LogIn extends Component {
                     this.handleChange(e);
                   }}
                 />
-                <FormFeedback valid>
-                </FormFeedback>
+                <FormFeedback valid />
                 <FormFeedback>
-                    Enter a properly formatted email address
+                  Enter a properly formatted email address
                 </FormFeedback>
               </FormGroup>
             </Col>
@@ -113,6 +126,6 @@ class LogIn extends Component {
 }
 
 export default connect(
-    mapStateToProps,
-    null
+  mapStateToProps,
+  null
 )(LogIn);

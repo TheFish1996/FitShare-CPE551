@@ -21,15 +21,36 @@ def uploadFile(file_name, data):
         return False
     return True
 
-
+#TODO: add logic for user already exists
 def createUser(email, password):
     response = cognito.sign_up(
         ClientId='5g8jtg70mjk1fk7m4ls7d1diuv',
         Username=email,
         Password=password,
-        
-    )
 
+    )
     return response['UserSub']
 
 
+#TODO: add logic for wrong username or pass
+def authenticateUser(email, password):
+    response = cognito.admin_initiate_auth(
+        ClientId='5g8jtg70mjk1fk7m4ls7d1diuv',
+        UserPoolId='us-east-1_asQ9AQdYt',
+        AuthFlow='ADMIN_NO_SRP_AUTH',
+        AuthParameters={
+            'USERNAME': email,
+            'PASSWORD': password
+        },
+
+
+    )
+
+    authResult = response['AuthenticationResult']
+    accessToken = authResult['AccessToken']
+    user = cognito.get_user(
+        AccessToken=accessToken
+    )
+
+
+    return user['Username']
