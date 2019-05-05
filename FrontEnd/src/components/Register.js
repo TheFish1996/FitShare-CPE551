@@ -49,7 +49,23 @@ class Register extends Component {
 
   submitForm(e) {
     e.preventDefault();
-    console.log(`Email: ${this.state.email}`);
+   
+
+    let data = {};
+    data["name"] = this.state.name;
+    data["email"] = this.state.email;
+    data["password"] = this.state.password;
+    fetch("http://localhost:5000/api/registerUser", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(response => {
+      console.log(response);
+      alert("done")
+   
+    });
   }
 
   render() {

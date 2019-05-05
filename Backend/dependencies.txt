@@ -1,0 +1,5 @@
+flask
+flask_pymongo
+flask_cors
+boto3
+logging?

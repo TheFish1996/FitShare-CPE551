@@ -4,7 +4,7 @@ from flask import Blueprint, jsonify, request
 from bson import json_util
 
 import json
-import awsS3
+import aws
 import index
 
 fitShare_api = Blueprint('fitshare_api', __name__)
@@ -47,5 +47,21 @@ def uploader():
         print "no file part"
     else:
         file = request.files['file']
-        awsS3.uploadFile(file.filename, file)
+        aws.uploadFile(file.filename, file)
     return "done"
+
+
+@fitShare_api.route("/api/registerUser", methods=['POST'])
+def registerUser():
+    newUser = {}
+    data = request.get_json()
+    response = aws.createUser(data['email'], data['password'])
+
+
+    newUser['Full-Name'] = data['name']
+    newUser['email'] = data['email']
+    Users = index.mongo.db.Users
+
+    Users.insert_one({"_id": response, "email": data["email"], "name": data['name']})
+
+    return 'done'

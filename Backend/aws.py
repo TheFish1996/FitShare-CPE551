@@ -6,6 +6,8 @@ import os
 
 s3 = boto3.resource('s3')
 
+cognito = boto3.client('cognito-idp')
+
 
 def uploadFile(file_name, data):
 
@@ -18,3 +20,16 @@ def uploadFile(file_name, data):
         logging.error(e)
         return False
     return True
+
+
+def createUser(email, password):
+    response = cognito.sign_up(
+        ClientId='5g8jtg70mjk1fk7m4ls7d1diuv',
+        Username=email,
+        Password=password,
+        
+    )
+
+    return response['UserSub']
+
+
