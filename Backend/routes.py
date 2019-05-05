@@ -67,7 +67,7 @@ def registerUser():
     return 'done'
 
 
-@fitShare_api.route("/api/autenticateUser", methods=['POST'])
+@fitShare_api.route("/api/authenticateUser", methods=['POST'])
 def authenticateUser():
     data = request.get_json()
     response = aws.authenticateUser(data['email'], data['password'])

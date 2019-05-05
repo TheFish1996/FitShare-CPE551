@@ -58,7 +58,7 @@ class LogIn extends Component {
     let data = {};
     data["email"] = this.state.email;
     data["password"] = this.state.password;
-    fetch("http://localhost:5000/api/autenticateUser", {
+    fetch("http://localhost:5000/api/authenticateUser", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
