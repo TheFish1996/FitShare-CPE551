@@ -44,8 +44,8 @@ class NavBar extends React.Component {
   render() {
     return (
       <Navbar fixed="top" color="light" light expand="md">
-        <NavbarBrand> 
-          <Link to="/" style={{textDecoration: "none", color: "black"}}> FitShare </Link>
+        <NavbarBrand tag={Link} to="/"> 
+          FitShare
         </NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>

@@ -1,7 +1,7 @@
 const ipAdress = "http://localhost:5000"
 export function loginAuthentication(email, password) {
     return async function(dispatch) {
-        // dispatch({type: })
+        dispatch({type: "FETCHING_DATA"})
 
         try {
             let response = await fetch(`${ipAdress}/api/authenticateUser`, {

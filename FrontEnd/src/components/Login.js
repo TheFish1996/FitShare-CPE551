@@ -8,7 +8,9 @@ import {
   Input,
   Button,
   FormText,
-  FormFeedback
+  FormFeedback,
+  Spinner,
+  Row
 } from "reactstrap";
 import { connect } from "react-redux";
 import "../styles/App.css";
@@ -17,7 +19,8 @@ import { loginAuthentication } from "../actions/userActions"
 
 const mapStateToProps = state => {
   return {
-    loggedIn: state.userInformation.loginSuccess
+    loggedIn: state.userInformation.loginSuccess,
+    refreshingData: state.userInformation.refreshing
   };
 };
 
@@ -62,7 +65,8 @@ class LogIn extends Component {
 
   render() {
     const { email, password } = this.state;
-    const { loggedIn } = this.props;
+    const { loggedIn, refreshingData } = this.props;
+    console.log(refreshingData)
     return (
       <div>
         {loggedIn && <Redirect to="/home" />}
@@ -105,6 +109,14 @@ class LogIn extends Component {
             </Col>
             <Button>Submit</Button>
           </Form>
+            {
+            refreshingData &&
+            <Row>
+              <Col>
+                <Spinner color="primary" style={{ width: '3rem', height: '3rem'}} />
+              </Col>
+            </Row>
+          }
         </Container>
       </div>
     );
