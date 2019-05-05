@@ -12,11 +12,17 @@ import {
   DropdownMenu,
   DropdownItem
 } from "reactstrap";
-
+import {connect} from 'react-redux'
 import {Link} from "react-router-dom"
+import {logout} from "../actions/userActions"
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => dispatch(logout())
+  }
+}
 
-export default class NavBar extends React.Component {
+class NavBar extends React.Component {
   constructor(props) {
     super(props);
 
@@ -30,23 +36,30 @@ export default class NavBar extends React.Component {
       isOpen: !this.state.isOpen
     });
   }
+
+  logout = () => {
+    this.props.logout()
+  }
+
   render() {
     return (
       <Navbar fixed="top" color="light" light expand="md">
-        <NavbarBrand href="/">FitShare</NavbarBrand>
+        <NavbarBrand> 
+          <Link to="/" style={{textDecoration: "none", color: "black"}}> FitShare </Link>
+        </NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink href="/sponsoredPrograms">
+              <NavLink tag={Link} to="/sponsoredPrograms">
                 Sponsored Programs
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/allPrograms">All Programs</NavLink>
+              <NavLink tag={Link} to="/allPrograms">All Programs</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/discoverTrainers">
+              <NavLink tag={Link} to="/discoverTrainers">
                 Discover Trainers
               </NavLink>
             </NavItem>
@@ -55,11 +68,11 @@ export default class NavBar extends React.Component {
                 Account
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem href="/profile">View Profile</DropdownItem>
+                <DropdownItem tag={Link} to="/profile">View Profile</DropdownItem>
                 <DropdownItem>Share Your Plan</DropdownItem>
                 <DropdownItem>Purchased Plans</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem>Logout</DropdownItem>
+                <DropdownItem onClick={this.logout}>Logout</DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
@@ -68,3 +81,8 @@ export default class NavBar extends React.Component {
     );
   }
 }
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(NavBar)

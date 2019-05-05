@@ -13,6 +13,7 @@ import {
 import { connect } from "react-redux";
 import "../styles/App.css";
 import { Redirect } from "react-router-dom";
+import { loginAuthentication } from "../actions/userActions"
 
 const mapStateToProps = state => {
   return {
@@ -53,25 +54,10 @@ class LogIn extends Component {
     });
   };
 
-  submitForm(e) {
+  async submitForm(e) {
     e.preventDefault();
-    let data = {};
-    data["email"] = this.state.email;
-    data["password"] = this.state.password;
-    fetch("http://localhost:5000/api/authenticateUser", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(data) {
-        let user = data; //this is where the server returns the user
-        console.log(user); //print user
-      });
+    this.props.dispatch((loginAuthentication(this.state.email, this.state.password)))
+
   }
 
   render() {

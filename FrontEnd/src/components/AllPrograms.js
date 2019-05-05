@@ -30,6 +30,7 @@ class AllPrograms extends Component {
 
     render() {
         const {loggedIn} = this.props
+        console.log(loggedIn)
         return (
             <div>
                 {!loggedIn && 

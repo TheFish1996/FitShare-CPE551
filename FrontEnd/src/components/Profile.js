@@ -1,12 +1,33 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import Navbar from "./NavBar";
 import {Container, Row, Col} from 'reactstrap';
+import {connect} from "react-redux";
+import { Redirect } from "react-router-dom";
 
 const pic = require("../img/logo.svg");
 
+const mapStateToProps = (state) => {
+    return {
+      loggedIn: state.userInformation.loginSuccess
+    };
+};
+
 function Profile(props){
+
+    const {loggedIn} = props
+
+    useEffect(() => {                                       //replaces 'componentDidMount'
+        if(loggedIn){
+            console.log('Component Mounted!')               //will set trainer data if logged in
+        }                                      
+    })
+
+
     return (
         <div>
+            {!loggedIn && 
+                <Redirect to="/" />
+            }
             <Navbar />
             <Container fluid className="Profile">
                 <Row>
@@ -39,4 +60,7 @@ function Profile(props){
     )
 }
 
-export default Profile
+export default connect(
+    mapStateToProps,
+    null
+)(Profile)
