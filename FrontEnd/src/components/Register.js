@@ -74,7 +74,7 @@ class Register extends Component {
     return (
       <div>
         <Container fluid className="App">
-          <h2>Register</h2>
+          <h2 style={{display: "flex", justifyContent: "center"}}>Register</h2>
           <Form className="form" onSubmit={e => this.submitForm(e)}>
             <Col>
               <FormGroup>
@@ -83,6 +83,7 @@ class Register extends Component {
                   placeholder="John Appleseed"
                   type="name"
                   name="name"
+                  autoFocus={true}
                   value={name}
                   onChange={e => {
                     this.handleChange(e);
@@ -128,7 +129,9 @@ class Register extends Component {
                 />
               </FormGroup>
             </Col>
-            <Button>Submit</Button>
+            <Col>
+              <Button>Submit</Button>
+            </Col>
           </Form>
         </Container>
       </div>

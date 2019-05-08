@@ -14,7 +14,7 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import "../styles/App.css";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { loginAuthentication } from "../actions/userActions"
 
 const mapStateToProps = state => {
@@ -71,7 +71,7 @@ class LogIn extends Component {
       <div>
         {loggedIn && <Redirect to="/home" />}
         <Container fluid className="App">
-          <h2>Sign In</h2>
+          <h2 style={{display: "flex", justifyContent: "center"}}>Sign In</h2>
           <Form className="form" onSubmit={e => this.submitForm(e)}>
             <Col>
               <FormGroup>
@@ -81,9 +81,11 @@ class LogIn extends Component {
                   name="email"
                   id="exampleEmail"
                   placeholder="name@example.com"
+                  autoFocus={true}
                   value={email}
                   valid={this.state.validate.emailState === "has-success"}
                   invalid={this.state.validate.emailState === "has-danger"}
+                  disabled={refreshingData ? true : false}
                   onChange={e => {
                     this.validateEmail(e);
                     this.handleChange(e);
@@ -102,20 +104,24 @@ class LogIn extends Component {
                   type="password"
                   name="password"
                   placeholder="********"
+                  disabled={refreshingData ? true : false}
                   value={password}
                   onChange={e => this.handleChange(e)}
                 />
               </FormGroup>
             </Col>
-            <Button>Submit</Button>
+            <Col style={{display: "flex", justifyContent: "space-between"}}>
+              <Button>Login</Button>
+              <Button color="primary" tag={Link} to="/register">Register</Button>
+            </Col>
           </Form>
             {
             refreshingData &&
-            <Row>
-              <Col>
-                <Spinner color="primary" style={{ width: '3rem', height: '3rem'}} />
+            <FormGroup >
+              <Col style={{display: "flex", justifyContent: "center"}}>
+                <Spinner color="primary" style={{ width: '4rem', height: '4rem'}} />
               </Col>
-            </Row>
+            </FormGroup>
           }
         </Container>
       </div>
