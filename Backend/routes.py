@@ -56,16 +56,21 @@ def discoverTrainers():
 @fitShare_api.route("/api/upload", methods=['POST'])
 def uploader():
     print "hit route"
-    userID = 'ddb9583b-ec14-4473-a0cb-cd27310eb146'
-    programName = "Some Test Program"
     if 'file' not in request.files:
         print "no file part"
     else:
         file = request.files['file']
+        data = request.form['Description']
+        print data
+        # userID = data['userID']
+        # programName = data['programName']
+        # price = data['price']
         response = aws.uploadFile(file.filename, file)
         Users = index.mongo.db.Users
-        Users.update_one({'_id': userID}, {
-            '$push': {'courses2': {programName: response}}}, upsert=True)
+        allPrograms = index.mongo.db.Programs
+        # Users.update_one({'_id': userID}, {
+        #     '$push': {'courses2': {programName: response}}}, upsert=True)
+
     return "done"
 
 
