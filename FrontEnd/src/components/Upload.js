@@ -70,32 +70,9 @@ function Upload(props){
 
     props.uploadProgram(fileData)
 
-    // fetch("http://localhost:5000/api/upload", {
-    //    method: "POST",
-    //    body: fileData
-    //  }).then(response => {
-    //    console.log(response);
-    //  });
-
   }
 
-//  const handleUploadImage = ev => {
-   
-//     ev.preventDefault();
-
-//     const data = new FormData();
-//     data.append("file", this.uploadInput.files[0]);
-
-//     fetch("http://localhost:5000/api/upload", {
-//       method: "POST",
-//       body: data
-//     }).then(response => {
-//       console.log(response);
-//     });
-//   };
-
-
- // console.log(formData)
+ //console.log(formData.FileList[0])
   return (
     <div>
       <Container fluid className="App">
@@ -146,7 +123,7 @@ function Upload(props){
               <Label>File</Label>
               <Input 
                 type="file"
-                name="programFile"
+                name="file"
                 placeholder={"Please Upload PDF File"}
                 min="1"
                 required={true}

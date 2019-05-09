@@ -44,9 +44,6 @@ export function uploadProgram(formData){
         try {
             let response = fetch(`${ipAdress}/api/upload`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
                 body: formData
             })
             //let responseJson = await response.json();
