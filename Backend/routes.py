@@ -39,6 +39,7 @@ def getSponsoredPrograms():
 
     return jsonify(response)
 
+
 @fitShare_api.route("/api/discoverTrainers")
 def discoverTrainers():
     trainers = index.mongo.db.Users
@@ -50,9 +51,6 @@ def discoverTrainers():
         response.append(newDoc)
 
     return jsonify(response)
-
-
-
 
 
 @fitShare_api.route("/api/upload", methods=['POST'])
@@ -88,6 +86,19 @@ def authenticateUser():
     response = aws.authenticateUser(data['email'], data['password'])
     Users = index.mongo.db.Users
     doc = Users.find_one({"_id": response})
-    user = json.loads(json_util.dumps(doc))
+    user = json.loads()
 
     return jsonify(user)
+
+
+@fitShare_api.route("/api/purchasedProgram", methods=['POST'])
+def purchasedProgram():
+    data = request.get_json()
+    userID = '57ddbb99-1407-40ab-ae7a-003ff42097af'
+    testProgram = "Some Test Program"
+    Users = index.mongo.db.Users
+    doc = Users.find_one_and_update({'_id': userID}, {'$inc': {'count': 1}})
+    user = Users.find_one({"_id": userID})
+    updatedUser = json.loads(json_util.dumps(user))
+
+    return jsonify(updatedUser)
