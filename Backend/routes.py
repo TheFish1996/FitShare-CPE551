@@ -94,11 +94,11 @@ def authenticateUser():
 @fitShare_api.route("/api/purchasedProgram", methods=['POST'])
 def purchasedProgram():
     data = request.get_json()
-    userID = '57ddbb99-1407-40ab-ae7a-003ff42097af'
-    testProgram = "Some Test Program"
+    userID = data['userID']
+    programName = data['programName']
     Users = index.mongo.db.Users
-    doc = Users.find_one_and_update(
-        {'_id': userID}, {'$inc': {'purchasedPrograms': 1}})
+    Users.update_one({'_id': userID}, {'$inc': {'purchasedProgramsCount': 1}}, upsert=True)
+    Users.update_one({'_id': userID}, {'$push': {'purchasedPrograms': programName}}, upsert=True)
     user = Users.find_one({"_id": userID})
     updatedUser = json.loads(json_util.dumps(user))
 

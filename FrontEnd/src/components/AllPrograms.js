@@ -42,7 +42,7 @@ class AllPrograms extends Component {
 
     render() {
         const {loggedIn, allPrograms, userData} = this.props
-        console.log(allPrograms)
+        console.log(userData)
         return (
             <div>
                 {!loggedIn && 
