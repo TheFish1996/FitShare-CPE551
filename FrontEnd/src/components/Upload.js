@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   Container,
   Col,
@@ -23,28 +23,76 @@ const mapStateToProps = (state) => {
 
 function Upload(props){
 
- const handleUploadImage = ev => {
-    ev.preventDefault();
+  const {userData, loggedIn} = props
+  const [formData, setFormData] = useState({
+    Name: userData.name,
+    Description: "",
+    Price: 0,
+    FileList: {}
+  })
 
-    const data = new FormData();
-    data.append("file", this.uploadInput.files[0]);
+ function handleDescription(e) {
+    let Description = e.target.value
+    setFormData(state => ({
+        ...state,
+        Description: Description
+    }))
+  }
+
+  function handlePrice(e) {
+    let Price = e.target.value
+    setFormData(state => ({
+        ...state,
+        Price: Price
+    }))
+  }
+
+  function handleImage(e) {
+    let files = e.target.files
+    setFormData(state => ({
+      ...state,
+      FileList: files
+    }))
+  }
+
+  function submitForm(e) {
+    e.preventDefault();
+    const {Name, Description, Price, FileList} = formData
+    console.log(FileList[0])
+    const fileData = new FormData();
+    fileData.append("file", FileList[0])
 
     fetch("http://localhost:5000/api/upload", {
-      method: "POST",
-      body: data
-    }).then(response => {
-      console.log(response);
-    });
-  };
+       method: "POST",
+       body: fileData
+     }).then(response => {
+       console.log(response);
+     });
 
-  const {userData, loggedIn} = props
-  console.log(userData)
+  }
 
+//  const handleUploadImage = ev => {
+   
+//     ev.preventDefault();
+
+//     const data = new FormData();
+//     data.append("file", this.uploadInput.files[0]);
+
+//     fetch("http://localhost:5000/api/upload", {
+//       method: "POST",
+//       body: data
+//     }).then(response => {
+//       console.log(response);
+//     });
+//   };
+
+
+ // console.log(formData)
   return (
     <div>
       <Container fluid className="App">
         <h2 style={{display: "flex", justifyContent: "center"}}>Upload Your Program</h2>
-        <Form className="form" onSubmit={() => {console.log("Testing")}}>
+        <Form className="form" onSubmit={(e) => submitForm(e)}>
           <Col>
             <FormGroup>
               <Label>Name</Label>
@@ -64,6 +112,9 @@ function Upload(props){
                 name="Description"
                 placeholder={"Please Type A Description"}
                 required={true}
+                onChange={(e) => {
+                  handleDescription(e)
+                }}
               />
             </FormGroup>
           </Col>
@@ -76,6 +127,9 @@ function Upload(props){
                 placeholder={"Please Include Price Over $0"}
                 min="1"
                 required={true}
+                onChange={(e) => {
+                  handlePrice(e)
+                }}
               />
             </FormGroup>
           </Col>
@@ -89,6 +143,9 @@ function Upload(props){
                 min="1"
                 required={true}
                 accept="application/pdf"
+                onChange={(e) => {
+                  handleImage(e)
+                }}
               />
             </FormGroup>
           </Col>
