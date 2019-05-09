@@ -16,7 +16,7 @@ function TrainerCard (props) {
             <Card outline color="info" className="TrainerCard">
                 <CardImg top width="100%" src={props.item.profilePic} alt="Card image cap" />
                 <CardBody>
-                    <h5 class="card-title">{props.item.name}</h5>
+                    <h5 className="card-title">{props.item.name}</h5>
                     <p>This is where a description of the trainer would go</p>
                     <h6>Email: {props.item.email}</h6>
                     <Button outline color="info" size="md" onClick={toggle}>Courses They Teach</Button>
@@ -27,7 +27,7 @@ function TrainerCard (props) {
                 <ModalBody>
                     {props.item.courses.map((item, index) => {
                         return (
-                            <a href={item.file} target="_blank">
+                            <a key={index} href={item.file} target="_blank">
                                 <h6>{index + 1}. {item.name}</h6>
                             </a>
                         )

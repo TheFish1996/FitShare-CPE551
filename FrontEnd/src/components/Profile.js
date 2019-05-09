@@ -8,17 +8,19 @@ const pic = require("../img/logo.svg");
 
 const mapStateToProps = (state) => {
     return {
-      loggedIn: state.userInformation.loginSuccess
+      loggedIn: state.userInformation.loginSuccess,
+      userData: state.userInformation.userData
     };
 };
 
 function Profile(props){
 
-    const {loggedIn} = props
+    const {loggedIn, userData} = props
+    console.log(userData)
 
     useEffect(() => {                                       //replaces 'componentDidMount'
         if(loggedIn){
-            console.log('Component Mounted!')               //will set trainer data if logged in
+            console.log('Component Mounted!')
         }                                      
     })
 
@@ -33,26 +35,20 @@ function Profile(props){
                 <Row>
                     <Col xs="6" sm="2">
                         <Row style={{marginBottom: 10}}>
-                            <img className="border border-primary rounded-circle" src={pic} alt="User Profile Pic" width="90%" siz></img>
+                            <img className="border border-primary rounded-circle" src={userData.profilePic} alt="User Profile Pic" width="100%"></img>
                         </Row>
                         <Row>
-                            <h4>Jonathan </h4>
+                            <h4>{userData.name}</h4>
                         </Row>
                         <Row>
-                            <p>Age: 22</p>
+                            <p>Email: {userData.email}</p>
                         </Row>
                         <Row>
-                            <p>Email: test@gmail.com</p>
-                        </Row>
-                        <Row>
-                            <p>Programs: 10</p>
+                            <p>Programs Purchases: 10</p>
                         </Row>
                     </Col>
                     <Col xs="6" sm="7" className="border border-primary">
                         <h1>Testing</h1>   
-                    </Col>
-                    <Col xs="6" sm="3">
-                        <h1>Testing</h1>      
                     </Col>
                 </Row>
             </Container>

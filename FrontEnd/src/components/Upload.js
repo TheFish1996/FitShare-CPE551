@@ -35,6 +35,7 @@ function Upload(props){
   const {userData, loggedIn} = props
   const [formData, setFormData] = useState({
     Name: userData.name,
+    programName: "",
     Description: "",
     Price: 0,
     FileList: {}
@@ -56,6 +57,14 @@ function Upload(props){
     }))
   }
 
+  function handleProgramName(e){
+    let programName = e.target.value
+    setFormData(state => ({
+      ...state,
+      programName: programName
+    }))
+  }
+
   function handleImage(e) {
     let files = e.target.files
     setFormData(state => ({
@@ -66,12 +75,13 @@ function Upload(props){
 
   function submitForm(e) {
     e.preventDefault();
-    const {Name, Description, Price, FileList} = formData
+    const {Name, Description, Price, FileList, programName} = formData
     const {userData} = props
     const fileData = new FormData();
     fileData.append("userID", userData._id)
     fileData.append("file", FileList[0])
     fileData.append("Name", Name)
+    fileData.append("programName", programName)
     fileData.append("Description", Description)
     fileData.append("Price", Price)
 
@@ -79,7 +89,7 @@ function Upload(props){
 
   }
 
- //console.log(formData.FileList[0])
+ console.log(formData)
   return (
     <div>
       {!loggedIn && 
@@ -97,6 +107,20 @@ function Upload(props){
                 name="Name"
                 disabled={true}
                 value={userData.name}
+              />
+            </FormGroup>
+          </Col>
+          <Col>
+            <FormGroup>
+              <Label>Program Name</Label>
+              <Input 
+                type="text"
+                name="programName"
+                placeholder="Program Name"
+                required = {true}
+                onChange={(e) => {
+                  handleProgramName(e)
+                }}
               />
             </FormGroup>
           </Col>

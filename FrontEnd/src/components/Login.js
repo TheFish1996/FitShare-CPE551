@@ -66,7 +66,6 @@ class LogIn extends Component {
   render() {
     const { email, password } = this.state;
     const { loggedIn, refreshingData } = this.props;
-    console.log(refreshingData)
     return (
       <div>
         {loggedIn && <Redirect to="/home" />}
