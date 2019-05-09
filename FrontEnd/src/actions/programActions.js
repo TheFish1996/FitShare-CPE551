@@ -36,3 +36,24 @@ export function getSponsoredPrograms(){
 
     }
 }
+
+export function uploadProgram(formData){
+    return async function(dispatch){
+        dispatch({type: "FETCHING_PROGRAMS"})
+
+        try {
+            let response = fetch(`${ipAdress}/api/upload`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: formData
+            })
+            //let responseJson = await response.json();
+            console.log(response)
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+}

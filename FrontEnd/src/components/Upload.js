@@ -13,6 +13,7 @@ import {
   Row,
 } from "reactstrap";
 import {connect} from 'react-redux'
+import {uploadProgram} from '../actions/programActions'
 
 const mapStateToProps = (state) => {
   return {
@@ -20,6 +21,12 @@ const mapStateToProps = (state) => {
     userData: state.userInformation.userData
   };
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      uploadProgram: (formData) => dispatch(uploadProgram(formData))
+  }
+}
 
 function Upload(props){
 
@@ -58,16 +65,17 @@ function Upload(props){
   function submitForm(e) {
     e.preventDefault();
     const {Name, Description, Price, FileList} = formData
-    console.log(FileList[0])
     const fileData = new FormData();
     fileData.append("file", FileList[0])
 
-    fetch("http://localhost:5000/api/upload", {
-       method: "POST",
-       body: fileData
-     }).then(response => {
-       console.log(response);
-     });
+    props.uploadProgram(fileData)
+
+    // fetch("http://localhost:5000/api/upload", {
+    //    method: "POST",
+    //    body: fileData
+    //  }).then(response => {
+    //    console.log(response);
+    //  });
 
   }
 
@@ -160,5 +168,5 @@ function Upload(props){
 
 export default connect(
 mapStateToProps,
-null
+mapDispatchToProps
 )(Upload);
