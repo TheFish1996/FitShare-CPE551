@@ -88,8 +88,6 @@ function Upload(props){
     props.uploadProgram(fileData)
 
   }
-
- console.log(formData)
   return (
     <div>
       {!loggedIn && 

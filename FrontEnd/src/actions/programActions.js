@@ -46,8 +46,12 @@ export function uploadProgram(formData){
                 method: 'POST',
                 body: formData
             })
-            //let responseJson = await response.json();
-            console.log(response)
+            let responseJson = await response.json()
+            console.log(responseJson)
+            dispatch({
+                type: "UPLOADED_PROGRAM",
+                payload: responseJson
+            })
         } catch (error) {
             console.log(error)
         }

@@ -29,6 +29,11 @@ function userInformation(state = userData, action){
                 ...state,
                 userData: action.payload,
         }
+        case "UPLOADED_PROGRAM":
+            return {
+                ...state,
+                userData: action.payload,
+        }
         default:
             return state
     }
