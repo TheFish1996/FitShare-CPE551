@@ -86,7 +86,7 @@ def authenticateUser():
     response = aws.authenticateUser(data['email'], data['password'])
     Users = index.mongo.db.Users
     doc = Users.find_one({"_id": response})
-    user = json.loads()
+    user = json.loads(json_util.dumps(doc))
 
     return jsonify(user)
 
@@ -97,7 +97,8 @@ def purchasedProgram():
     userID = '57ddbb99-1407-40ab-ae7a-003ff42097af'
     testProgram = "Some Test Program"
     Users = index.mongo.db.Users
-    doc = Users.find_one_and_update({'_id': userID}, {'$inc': {'purchasedPrograms': 1}})
+    doc = Users.find_one_and_update(
+        {'_id': userID}, {'$inc': {'purchasedPrograms': 1}})
     user = Users.find_one({"_id": userID})
     updatedUser = json.loads(json_util.dumps(user))
 
