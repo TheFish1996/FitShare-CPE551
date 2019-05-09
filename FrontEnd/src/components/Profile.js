@@ -33,9 +33,9 @@ function Profile(props){
             <Navbar />
             <Container fluid className="Profile">
                 <Row>
-                    <Col xs="6" sm="2">
+                    <Col xs="6" sm="3">
                         <Row style={{marginBottom: 10}}>
-                            <img className="border border-primary rounded-circle" src={userData.profilePic} alt="User Profile Pic" width="100%"></img>
+                            <img className="border border-primary rounded-circle" src={userData.profilePic} alt="User Profile Pic" width="80%" height="50%"></img>
                         </Row>
                         <Row>
                             <h4>{userData.name}</h4>
@@ -44,11 +44,13 @@ function Profile(props){
                             <p>Email: {userData.email}</p>
                         </Row>
                         <Row>
-                            <p>Programs Purchases: 10</p>
+                            <p>Programs Purchased: {
+                                userData.purchasedPrograms === undefined ? 0 : userData.purchasedPrograms.length
+                            }</p>
                         </Row>
                     </Col>
                     <Col xs="6" sm="7" className="border border-primary">
-                        <h1>Testing</h1>   
+                        <h1>Testingg</h1>
                     </Col>
                 </Row>
             </Container>
