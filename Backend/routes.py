@@ -80,7 +80,11 @@ def uploader():
 
         allPrograms.insert_one(insertionModel)
 
-    return "done"
+        doc = Users.find_one({"_id": response})
+        user = json.loads(json_util.dumps(doc))
+
+
+    return jsonify(user)
 
 
 @fitShare_api.route("/api/registerUser", methods=['POST'])
