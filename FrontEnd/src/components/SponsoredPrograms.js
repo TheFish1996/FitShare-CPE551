@@ -11,7 +11,8 @@ const fakeData = require('../API/test.json') //fakedata used to just populate fo
 const mapStateToProps = (state) => {
     return {
       loggedIn: state.userInformation.loginSuccess,
-      sponsoredPrograms: state.programInformation.sponsoredPrograms
+      sponsoredPrograms: state.programInformation.sponsoredPrograms,
+      userData: state.userInformation.userData
     };
   };
 
@@ -41,7 +42,7 @@ class SponsoredPrograms extends Component {
     }
 
     render() {
-        const {loggedIn, sponsoredPrograms} = this.props
+        const {loggedIn, sponsoredPrograms, userData} = this.props
         return (
             <div>
                 {!loggedIn && 
@@ -53,7 +54,7 @@ class SponsoredPrograms extends Component {
                     {sponsoredPrograms.map((item, index) => {
                         return (
                             <Col key={item._id.$oid} xs="6" sm="3">
-                                <ProgramCard item={item} />
+                                <ProgramCard user={userData._id} item={item} />
                             </Col>
                         )
                     })}

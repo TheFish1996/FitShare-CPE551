@@ -1,6 +1,6 @@
 const userData = {
     refreshing: false,
-    user: {},
+    userData: {},
     loginSuccess: false,
 }
 
@@ -14,16 +14,21 @@ function userInformation(state = userData, action){
         case "LOGIN_SUCCESS":
             return {
                 ...state,
-                user: {}, //const {email address, etc}  = action.payload
+                userData: action.payload,
                 loginSuccess: true,
                 refreshing: false
         }
         case "LOGOUT_SUCCESS":
             return {
                 ...state,
-                user: {},
+                userData: {},
                 loginSuccess: false,     //when users logs out we want to set dataStream back to null, and login state,
-            }
+        }
+        case "BOUGHT_PROGRAM":
+            return {
+                ...state,
+                userData: action.payload,
+        }
         default:
             return state
     }

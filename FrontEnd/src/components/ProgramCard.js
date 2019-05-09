@@ -1,7 +1,15 @@
 import React, { Component } from "react";
 import {Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button, CardFooter, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import {connect} from 'react-redux'
+import {purchaseProgram} from '../actions/userActions'
 
 const pic = require("../img/logo.svg");
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        purchaseProgram: (userID, programName) => dispatch(purchaseProgram(userID, programName))
+    }
+  }
 
 class ProgramCard extends Component {
     constructor(props){
@@ -12,8 +20,8 @@ class ProgramCard extends Component {
         this.toggle = this.toggle.bind(this);
     }
 
-    toggle() {
-        this.setState(prevState => ({
+ toggle() {   
+    this.setState(prevState => ({
             modal: !prevState.modal
         }))
     }
@@ -36,7 +44,9 @@ class ProgramCard extends Component {
                     </ModalBody>
                     <ModalFooter>
                         <a href={this.props.item.file} target="_blank">
-                            <Button color="primary" onClick={this.toggle}>Buy Program</Button>
+                            <Button color="primary" onClick={() => {
+                                this.props.purchaseProgram(this.props.item.user, this.props.item.name)
+                            }}>Buy Program</Button>
                         </a>
                         <Button color="secondary" onClick={this.toggle}>Click To Exit</Button>
                     </ModalFooter>
@@ -47,4 +57,7 @@ class ProgramCard extends Component {
 }
 
 
-export default ProgramCard
+export default connect(
+null,
+mapDispatchToProps
+)(ProgramCard)
