@@ -39,6 +39,18 @@ def getSponsoredPrograms():
 
     return jsonify(response)
 
+@fitShare_api.route("/api/discoverTrainers")
+def discoverTrainers():
+    trainers = index.mongo.db.Users
+    response = []
+
+    output = trainers.find({})
+    for document in output:
+        newDoc = json.loads(json_util.dumps(document))
+        response.append(newDoc)
+
+    return jsonify(response)
+
 
 @fitShare_api.route("/api/upload", methods=['POST'])
 def uploader():
