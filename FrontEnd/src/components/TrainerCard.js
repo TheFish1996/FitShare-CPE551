@@ -16,18 +16,22 @@ function TrainerCard (props) {
             <Card outline color="info" className="TrainerCard">
                 <CardImg top width="100%" src={props.item.profilePic} alt="Card image cap" />
                 <CardBody>
-                    <CardTitle>{props.item.name}</CardTitle>
+                    <h5 class="card-title">{props.item.name}</h5>
                     <p>This is where a description of the trainer would go</p>
                     <h6>Email: {props.item.email}</h6>
                     <Button outline color="info" size="md" onClick={toggle}>Courses They Teach</Button>
                 </CardBody>
             </Card>
             <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Courses Taught by {props.item.name}</ModalHeader>
+                <ModalHeader style={{borderColor: "#17a2b8"}} toggle={toggle}>Courses Taught by {props.item.name}</ModalHeader>
                 <ModalBody>
-                    Place Holder for various courses {props.item.courses}
+                    {props.item.courses.map((item, index) => {
+                        return (
+                            <h6>{index + 1}. {item}</h6>
+                        )
+                    })}
                 </ModalBody>
-                <ModalFooter>
+                <ModalFooter style={{borderColor: "#17a2b8"}}>
                     <Button color="primary" onClick={toggle}>Click To Exit</Button>
                 </ModalFooter>
             </Modal>

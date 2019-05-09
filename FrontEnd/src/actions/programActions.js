@@ -23,7 +23,7 @@ export function getSponsoredPrograms(){
         dispatch({type: "FETCHING_PROGRAMS"})
 
         try {          
-            let response = await fetch(`${ipAdress}/api/allPrograms`)
+            let response = await fetch(`${ipAdress}/api/sponsoredPrograms`)
             let responseJson = await response.json();
             dispatch({
                 type: "FETCHING_SPONSORED_PROGRAMS_SUCCESS",
