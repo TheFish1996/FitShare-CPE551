@@ -69,7 +69,7 @@ class NavBar extends React.Component {
               </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem tag={Link} to="/profile">View Profile</DropdownItem>
-                <DropdownItem>Share Your Plan</DropdownItem>
+                <DropdownItem tag={Link} to="/upload">Share Your Plan</DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem onClick={this.logout}>Logout</DropdownItem>
               </DropdownMenu>

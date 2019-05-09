@@ -7,7 +7,6 @@ import SponsoredPrograms from "./components/SponsoredPrograms";
 import AllPrograms from "./components/AllPrograms";
 import Navbar from "./components/NavBar";
 import Upload from "./components/Upload";
-import Upload2 from "./components/Upload2";
 import LogIn from "./components/Login";
 import Register from "./components/Register";
 import DiscoverTrainers from "./components/DiscoverTrainers"

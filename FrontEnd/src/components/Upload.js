@@ -14,6 +14,8 @@ import {
 } from "reactstrap";
 import {connect} from 'react-redux'
 import {uploadProgram} from '../actions/programActions'
+import Navbar from "./NavBar";
+import { Redirect } from "react-router-dom";
 
 const mapStateToProps = (state) => {
   return {
@@ -65,9 +67,13 @@ function Upload(props){
   function submitForm(e) {
     e.preventDefault();
     const {Name, Description, Price, FileList} = formData
+    const {userData} = props
     const fileData = new FormData();
+    fileData.append("userID", userData._id)
     fileData.append("file", FileList[0])
+    fileData.append("Name", Name)
     fileData.append("Description", Description)
+    fileData.append("Price", Price)
 
     props.uploadProgram(fileData)
 
@@ -76,6 +82,10 @@ function Upload(props){
  //console.log(formData.FileList[0])
   return (
     <div>
+      {!loggedIn && 
+      <Redirect to="/" />
+      } 
+      <Navbar />
       <Container fluid className="App">
         <h2 style={{display: "flex", justifyContent: "center"}}>Upload Your Program</h2>
         <Form className="form" onSubmit={(e) => submitForm(e)}>
