@@ -17,7 +17,7 @@ def hello():
 
 @fitShare_api.route("/api/allPrograms")
 def getAllPrograms():
-    allPrograms = index.mongo.db.allPrograms
+    allPrograms = index.mongo.db.Programs
     response = []
 
     output = allPrograms.find({})
@@ -50,6 +50,9 @@ def discoverTrainers():
         response.append(newDoc)
 
     return jsonify(response)
+
+
+
 
 
 @fitShare_api.route("/api/upload", methods=['POST'])
