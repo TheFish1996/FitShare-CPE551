@@ -97,7 +97,6 @@ def purchasedProgram():
     userID = data['userID']
     programName = data['programName']
     Users = index.mongo.db.Users
-    Users.update_one({'_id': userID}, {'$inc': {'purchasedProgramsCount': 1}}, upsert=True)
     Users.update_one({'_id': userID}, {'$push': {'purchasedPrograms': programName}}, upsert=True)
     user = Users.find_one({"_id": userID})
     updatedUser = json.loads(json_util.dumps(user))
