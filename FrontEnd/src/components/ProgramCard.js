@@ -21,21 +21,24 @@ class ProgramCard extends Component {
     render() {
         return (
             <div>
-                <Card className="ProgramsCard">
+                <Card outline color="secondary" className="ProgramsCard">
                     <CardImg top width="100%" src={pic} alt="Card image cap" />
                     <CardBody>
                         <CardTitle>{this.props.item.name}</CardTitle>
-                        <h5>{this.props.item.price}</h5>
+                        <h5>${this.props.item.price}</h5>
                         <Button outline color="info" size="md" onClick={this.toggle}>Click Here for More Details</Button>
                     </CardBody>
                 </Card>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle}>Details for {this.props.item.name}</ModalHeader>
                     <ModalBody>
-                        This course is just a test and a place holder and the instructor for this course is: {this.props.item.instructor}
+                        This course is just a test and a place holder and the instructor for this course is: {this.props.item.trainer}
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.toggle}>Click To Exit</Button>
+                        <a href={this.props.item.file} target="_blank">
+                            <Button color="primary" onClick={this.toggle}>Buy Program</Button>
+                        </a>
+                        <Button color="secondary" onClick={this.toggle}>Click To Exit</Button>
                     </ModalFooter>
                 </Modal>
             </div>
