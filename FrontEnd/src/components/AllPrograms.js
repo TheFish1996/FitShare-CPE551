@@ -4,33 +4,44 @@ import { Redirect } from "react-router-dom";
 import {connect} from "react-redux";
 import Navbar from "./NavBar";
 import ProgramCard from "./ProgramCard"
+import {getAllPrograms} from "../actions/programActions"
 
 const fakeData = require('../API/test.json') //fakedata used to just populate for now
 
 const mapStateToProps = (state) => {
     return {
-      loggedIn: state.userInformation.loginSuccess
+      loggedIn: state.userInformation.loginSuccess,
+      allPrograms: state.programInformation.allPrograms
     };
   };
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+      getAllPrograms: () => dispatch(getAllPrograms())
+    }
+  }
 
 class AllPrograms extends Component {
     constructor(props){
         super(props)
         this.state = {
-            AllProgramData: fakeData
+            AllProgramData: fakeData,
+            updatedAllProgams: false
         }
     }
 
-
     componentDidMount(){        //whenever mounted it should fetch the new data
-        if(this.props.loggedIn){
-            console.log(this.state.AllProgramData)
+        if(this.props.loggedIn && !this.state.updatedAllProgams){
+            this.props.getAllPrograms();
+            this.setState({
+                updatedAllProgams: true
+            })
         }
     }
 
     render() {
-        const {loggedIn} = this.props
-        console.log(loggedIn)
+        const {loggedIn, allPrograms} = this.props
+        console.log(allPrograms)
         return (
             <div>
                 {!loggedIn && 
@@ -39,9 +50,9 @@ class AllPrograms extends Component {
                 <Navbar />
                 <Container fluid className="Programs">
                     <Row>
-                    {this.state.AllProgramData.map((item, index) => {
+                    {allPrograms.map((item, index) => {
                         return (
-                            <Col key={item.id} xs="6" sm="3">
+                            <Col key={item._id.$oid} xs="6" sm="3">
                                 <ProgramCard item={item} />
                             </Col>
                         )
@@ -55,5 +66,5 @@ class AllPrograms extends Component {
 
 export default connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
   )(AllPrograms);
