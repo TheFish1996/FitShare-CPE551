@@ -29,7 +29,7 @@ def getAllPrograms():
 
 @fitShare_api.route("/api/sponsoredPrograms")
 def getSponsoredPrograms():
-    sponsoredPrograms = index.mongo.db.sponsoredPrograms
+    sponsoredPrograms = index.mongo.db.SponsoredPrograms
     response = []
 
     output = sponsoredPrograms.find({})
