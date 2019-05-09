@@ -14,10 +14,11 @@ function TrainerCard (props) {
     return (
         <div>
             <Card outline color="info" className="TrainerCard">
-                <CardImg top width="100%" src={pic} alt="Card image cap" />
+                <CardImg top width="100%" src={props.item.profilePic} alt="Card image cap" />
                 <CardBody>
                     <CardTitle>{props.item.name}</CardTitle>
-                    <p>{props.item.description}</p>
+                    <p>This is where a description of the trainer would go</p>
+                    <h6>Email: {props.item.email}</h6>
                     <Button outline color="info" size="md" onClick={toggle}>Courses They Teach</Button>
                 </CardBody>
             </Card>
