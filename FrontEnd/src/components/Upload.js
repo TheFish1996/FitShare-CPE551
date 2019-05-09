@@ -67,6 +67,7 @@ function Upload(props){
     const {Name, Description, Price, FileList} = formData
     const fileData = new FormData();
     fileData.append("file", FileList[0])
+    fileData.append("Name", Name)
 
     props.uploadProgram(fileData)
 
