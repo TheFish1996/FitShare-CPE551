@@ -60,16 +60,25 @@ def uploader():
         print "no file part"
     else:
         file = request.files['file']
-        data = request.form['Description']
-        print data
-        # userID = data['userID']
-        # programName = data['programName']
-        # price = data['price']
+        userID = request.form['userID']
+        price = request.form['Price']
+
+        intPrice = int(price)
         response = aws.uploadFile(file.filename, file)
         Users = index.mongo.db.Users
         allPrograms = index.mongo.db.Programs
-        # Users.update_one({'_id': userID}, {
-        #     '$push': {'courses2': {programName: response}}}, upsert=True)
+        Users.update_one({'_id': userID}, {
+            '$push': {'courses': {"name": request.form['programName'], "file": response['file']}}}, upsert=True)
+
+        insertionModel = {
+            "name": request.form['programName'],
+            "price": intPrice,
+            "description": request.form['Description'],
+            "trainer": request.form['Name'],
+            "file": response['file']
+        }
+
+        allPrograms.insert_one(insertionModel)
 
     return "done"
 

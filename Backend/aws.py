@@ -17,10 +17,15 @@ def uploadFile(file_name, data):
         print "uploaded to s3"
         publicURL = "https://s3.amazonaws.com/fitshare-programs/%s" % file_name #this is bootleg and a hacky way - not advised at all.
 
+        response = {
+            "name": file_name,
+            "file": publicURL
+        }
+
     except ClientError as e:
         logging.error(e)
         return False
-    return publicURL
+    return response
 
 # TODO: add logic for user already exists
 
