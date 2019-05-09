@@ -11,7 +11,8 @@ const fakeData = require('../API/Instructor.json') //fakedata used to just popul
 const mapStateToProps = (state) => {
     return {
       loggedIn: state.userInformation.loginSuccess,
-      trainerDetails: state.trainerInformation.trainerDetails
+      trainerDetails: state.trainerInformation.trainerDetails,
+      refreshing: state.trainerInformation.refreshing
     };
 };
 
@@ -22,13 +23,14 @@ const mapDispatchToProps = (dispatch) => {
   }
 
 function DiscoverTrainer(props){
-    const {loggedIn, trainerDetails} = props
+    const {loggedIn, trainerDetails, refreshing} = props
     const [trainerName, setTrainerName] = useState("Name")  //setTrainerName acts as a this.setState, use 'useMergeState' if you want to combine muliple states
-    const [trainerData, setTrainerData] = useState(fakeData)
+    const [updatedTrainers, setTrainerUpdate] = useState(false)
 
     useEffect(() => {                                       //replaces 'componentDidMount'
-        if(loggedIn){
+        if(loggedIn && !updatedTrainers){
             props.discoverTrainers()
+            setTrainerUpdate(true)
         }                                      
     })
     return (
