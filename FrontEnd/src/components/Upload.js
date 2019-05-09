@@ -1,14 +1,29 @@
 import React from "react";
-import NavbarComponent from "./NavBar";
+import {
+  Container,
+  Col,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Button,
+  FormText,
+  FormFeedback,
+  Spinner,
+  Row,
+} from "reactstrap";
+import {connect} from 'react-redux'
 
-class Upload extends React.Component {
-  constructor(props) {
-    super(props);
+const mapStateToProps = (state) => {
+  return {
+    loggedIn: state.userInformation.loginSuccess,
+    userData: state.userInformation.userData
+  };
+};
 
-    // this.handleUploadImage = this.handleUploadImage.bind(this);
-  }
+function Upload(props){
 
-  handleUploadImage = ev => {
+ const handleUploadImage = ev => {
     ev.preventDefault();
 
     const data = new FormData();
@@ -22,33 +37,71 @@ class Upload extends React.Component {
     });
   };
 
-  render() {
-    return (
-      <div>
-        <form
-          action="/upload"
-          method="post"
-          encType="multipart/form-data"
-          onSubmit={this.handleUploadImage}
-        >
-          <div>
-            <input
-              ref={ref => {
-                this.uploadInput = ref;
-              }}
-              type="file"
-              name="file"
-            />
-          </div>
+  const {userData, loggedIn} = props
+  console.log(userData)
 
-          <br />
-          <div>
-            <button>Upload</button>
-          </div>
-        </form>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Container fluid className="App">
+        <h2 style={{display: "flex", justifyContent: "center"}}>Upload Your Program</h2>
+        <Form className="form" onSubmit={() => {console.log("Testing")}}>
+          <Col>
+            <FormGroup>
+              <Label>Name</Label>
+              <Input 
+                type="text"
+                name="Name"
+                disabled={true}
+                value={userData.name}
+              />
+            </FormGroup>
+          </Col>
+          <Col>
+            <FormGroup>
+              <Label>Description</Label>
+              <Input 
+                type="text"
+                name="Description"
+                placeholder={"Please Type A Description"}
+                required={true}
+              />
+            </FormGroup>
+          </Col>
+          <Col>
+            <FormGroup>
+              <Label>Price ($)</Label>
+              <Input 
+                type="number"
+                name="Price"
+                placeholder={"Please Include Price Over $0"}
+                min="1"
+                required={true}
+              />
+            </FormGroup>
+          </Col>
+          <Col>
+            <FormGroup>
+              <Label>File</Label>
+              <Input 
+                type="file"
+                name="programFile"
+                placeholder={"Please Upload PDF File"}
+                min="1"
+                required={true}
+                accept="application/pdf"
+              />
+            </FormGroup>
+          </Col>
+          <Col style={{display: "flex", justifyContent: "space-between"}}>
+              <Button>Submit</Button>
+          </Col>
+        </Form>
+      </Container>
+    </div>
+  )
 }
 
-export default Upload;
+export default connect(
+mapStateToProps,
+null
+)(Upload);

@@ -27,7 +27,9 @@ function TrainerCard (props) {
                 <ModalBody>
                     {props.item.courses.map((item, index) => {
                         return (
-                            <h6>{index + 1}. {item}</h6>
+                            <a href={item.file} target="_blank">
+                                <h6>{index + 1}. {item.name}</h6>
+                            </a>
                         )
                     })}
                 </ModalBody>

@@ -24,6 +24,7 @@ class App extends Component {
           <Route path="/allPrograms" component={AllPrograms} />
           <Route path="/discoverTrainers" component={DiscoverTrainers} />
           <Route path="/profile" component={Profile} />
+          <Route path="/upload" component={Upload} />
         </Switch>
       </div>
     );
