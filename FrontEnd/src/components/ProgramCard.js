@@ -45,7 +45,7 @@ class ProgramCard extends Component {
                     <ModalFooter>
                         <a href={this.props.item.file} target="_blank">
                             <Button color="primary" onClick={() => {
-                                this.props.purchaseProgram(this.props.item.user, this.props.item.name)
+                                this.props.purchaseProgram(this.props.user, this.props.item.name)
                             }}>Buy Program</Button>
                         </a>
                         <Button color="secondary" onClick={this.toggle}>Click To Exit</Button>
