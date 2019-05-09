@@ -56,11 +56,16 @@ def discoverTrainers():
 @fitShare_api.route("/api/upload", methods=['POST'])
 def uploader():
     print "hit route"
+    userID = 'ddb9583b-ec14-4473-a0cb-cd27310eb146'
+    programName = "Some Test Program"
     if 'file' not in request.files:
         print "no file part"
     else:
         file = request.files['file']
-        aws.uploadFile(file.filename, file)
+        response = aws.uploadFile(file.filename, file)
+        Users = index.mongo.db.Users
+        Users.update_one({'_id': userID}, {
+            '$push': {'courses2': {programName: response}}}, upsert=True)
     return "done"
 
 
@@ -97,8 +102,23 @@ def purchasedProgram():
     userID = data['userID']
     programName = data['programName']
     Users = index.mongo.db.Users
-    Users.update_one({'_id': userID}, {'$push': {'purchasedPrograms': programName}}, upsert=True)
+    Users.update_one({'_id': userID}, {
+                     '$push': {'purchasedPrograms': programName}}, upsert=True)
     user = Users.find_one({"_id": userID})
     updatedUser = json.loads(json_util.dumps(user))
 
     return jsonify(updatedUser)
+
+
+@fitShare_api.route("/api/rewriter")
+def rewriter():
+    users = index.mongo.db.Users
+    response = []
+
+    output = users.find({})
+    for document in output:
+        userID = document["_id"]
+        users.update_one({'_id': userID}, {
+            '$push': {'courses': {'name': "Fit Share Test Program", 'file': 'https://s3.amazonaws.com/fitshare-programs/fit-test.pdf'}}}, upsert=True)
+
+    return 'DONE'

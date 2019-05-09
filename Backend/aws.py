@@ -15,13 +15,16 @@ def uploadFile(file_name, data):
         s3.Bucket('fitshare-programs').put_object(Key=file_name,
                                                   Body=data, ACL='public-read')
         print "uploaded to s3"
+        publicURL = "https://s3.amazonaws.com/fitshare-programs/%s" % file_name #this is bootleg and a hacky way - not advised at all.
 
     except ClientError as e:
         logging.error(e)
         return False
-    return True
+    return publicURL
 
-#TODO: add logic for user already exists
+# TODO: add logic for user already exists
+
+
 def createUser(email, password):
     response = cognito.sign_up(
         ClientId='5g8jtg70mjk1fk7m4ls7d1diuv',
@@ -32,7 +35,7 @@ def createUser(email, password):
     return response['UserSub']
 
 
-#TODO: add logic for wrong username or pass
+# TODO: add logic for wrong username or pass
 def authenticateUser(email, password):
     response = cognito.admin_initiate_auth(
         ClientId='5g8jtg70mjk1fk7m4ls7d1diuv',
@@ -51,6 +54,5 @@ def authenticateUser(email, password):
     user = cognito.get_user(
         AccessToken=accessToken
     )
-
 
     return user['Username']
