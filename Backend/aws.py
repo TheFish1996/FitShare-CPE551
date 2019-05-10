@@ -34,7 +34,7 @@ def createUser(email, password):
 
     # API CALL
     response = cognito.sign_up(
-        ClientId='5g8jtg70mjk1fk7m4ls7d1diuv',
+        ClientId='cognito client id goes here',
         Username=email,
         Password=password,
 
@@ -46,8 +46,8 @@ def authenticateUser(email, password):
 
     # API CALL - server side authentication - returns an access token
     response = cognito.admin_initiate_auth(
-        ClientId='5g8jtg70mjk1fk7m4ls7d1diuv',
-        UserPoolId='us-east-1_asQ9AQdYt',
+        ClientId='cognito information here',
+        UserPoolId='cognito user pool id goes here',
         AuthFlow='ADMIN_NO_SRP_AUTH',
         AuthParameters={
             'USERNAME': email,

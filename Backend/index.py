@@ -7,7 +7,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 app.config['MONGO_DBNAME'] = 'FitShare'
-app.config["MONGO_URI"] = "mongodb+srv://fitshare:test1234@cluster0-xygnj.mongodb.net/test?retryWrites=true"
+app.config["MONGO_URI"] = "mongo db URI goes here"
 mongo = PyMongo(app)
 CORS(app)
 
