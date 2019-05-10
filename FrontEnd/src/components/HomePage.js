@@ -5,22 +5,43 @@ import {connect} from "react-redux";
 import Navbar from "./NavBar";
 import Carousel from "./Carousel";
 import Card from "./Card";
+import TrainerCard from "./TrainerCard"
+import { discoverTrainers } from "../actions/trainerActions"
 
 const mapStateToProps = (state) => {
   return {
-    loggedIn: state.userInformation.loginSuccess
+    loggedIn: state.userInformation.loginSuccess,
+    trainerDetails: state.trainerInformation.trainerDetails
   };
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    discoverTrainers: () => dispatch(discoverTrainers())
+  }
+}
 
 class HomePage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      updatedTrainers: false,
+    };
+  }
+
+  componentWillMount(){
+    if(this.props.loggedIn && !this.state.updatedTrainers){
+      this.props.discoverTrainers()
+      this.setState({
+        updatedTrainers: true,
+      })
+  } 
   }
 
   render() {
-    const {loggedIn} = this.props
+    const {loggedIn, trainerDetails} = this.props
+    console.log(trainerDetails[0])
     return (
       <>
         {!loggedIn && 
@@ -34,15 +55,24 @@ class HomePage extends Component {
             </Col>
             <br />
           </Row>
-          <Row>
+          <Row style={{marginTop: 10}}>
             <Col xs="6" sm="4">
-              <Card title = "title 1" caption = "caption 1" />
+            {
+              trainerDetails[0] !== undefined &&
+              <TrainerCard item={trainerDetails[0]} />
+            }
             </Col>
             <Col xs="6" sm="4">
-              <Card title = "title 2" caption = "caption 2" />
+              {
+                trainerDetails[1] !== undefined &&
+                <TrainerCard item={trainerDetails[1]} />
+              }
             </Col>
             <Col xs="6" sm="4">
-              <Card title = "title 3" caption = "caption 3" />
+              {
+                trainerDetails[2] !== undefined &&
+                <TrainerCard item={trainerDetails[2]} />
+              }
             </Col>
           </Row>
         </Container>
@@ -53,5 +83,5 @@ class HomePage extends Component {
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(HomePage);

@@ -45,19 +45,21 @@ function Profile(props){
                         </Row>
                         <Row>
                             <p>Programs Purchased: {
-                                userData.purchasedPrograms === null ? 0 : userData.purchasedPrograms.length
+                                userData.purchasedPrograms === undefined ? 0 : userData.purchasedPrograms.length
                             }</p>
                         </Row>
                     </Col>
                     <Col xs="6" sm="7" className="border border-primary">
                         <h2>Your Courses Taught</h2>
-                        {userData.courses.map((item, index) => {
+                        {userData.courses !== undefined ? userData.courses.map((item, index) => {
                             return (
                                 <a key={index} href={item.file} target="_blank">
                                     <h3>{index + 1}. {item.name}</h3>
                                 </a>
                             )
-                        })}
+                        })
+                        : <h3>You Teach No Courses</h3>
+                        }
                     </Col>
                 </Row>
             </Container>

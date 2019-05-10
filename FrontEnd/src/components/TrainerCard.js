@@ -25,13 +25,15 @@ function TrainerCard (props) {
             <Modal isOpen={modal} toggle={toggle}>
                 <ModalHeader style={{borderColor: "#17a2b8"}} toggle={toggle}>Courses Taught by {props.item.name}</ModalHeader>
                 <ModalBody>
-                    {props.item.courses.map((item, index) => {
+                    {props.item.courses !== undefined ? props.item.courses.map((item, index) => {
                         return (
                             <a key={index} href={item.file} target="_blank">
                                 <h6>{index + 1}. {item.name}</h6>
                             </a>
                         )
-                    })}
+                    }) 
+                    : <h3>No Programs Taught </h3>
+                }
                 </ModalBody>
                 <ModalFooter style={{borderColor: "#17a2b8"}}>
                     <Button color="primary" onClick={toggle}>Click To Exit</Button>
