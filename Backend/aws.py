@@ -4,13 +4,14 @@ import logging
 from botocore.exceptions import ClientError
 import os
 
-s3 = boto3.resource('s3')
+s3 = boto3.resource('s3') # create a reference to AWS S3 resources
 
-cognito = boto3.client('cognito-idp')
+cognito = boto3.client('cognito-idp') # create a reference to AWS cognito service
 
-
+# function that will upload a file to our S3 bucket
 def uploadFile(file_name, data):
 
+    # try catch clause that will access the S3 bucket, upload pdf file, make it available for public read, return the download link
     try:
         s3.Bucket('fitshare-programs').put_object(Key=file_name,
                                                   Body=data, ACL='public-read')
@@ -27,21 +28,23 @@ def uploadFile(file_name, data):
         return False
     return response
 
-# TODO: add logic for user already exists
 
-
+# AWS cognito function that will create new users
 def createUser(email, password):
+
+    # API CALL
     response = cognito.sign_up(
         ClientId='5g8jtg70mjk1fk7m4ls7d1diuv',
         Username=email,
         Password=password,
 
     )
-    return response['UserSub']
+    return response['UserSub'] # return UID
 
-
-# TODO: add logic for wrong username or pass
+#AWS cognito function that will authenticate new users
 def authenticateUser(email, password):
+
+    # API CALL - server side authentication - returns an access token
     response = cognito.admin_initiate_auth(
         ClientId='5g8jtg70mjk1fk7m4ls7d1diuv',
         UserPoolId='us-east-1_asQ9AQdYt',
@@ -53,11 +56,13 @@ def authenticateUser(email, password):
 
 
     )
+    authResult = response['AuthenticationResult'] 
+    accessToken = authResult['AccessToken'] # access token is here
 
-    authResult = response['AuthenticationResult']
-    accessToken = authResult['AccessToken']
+    #use the access token to find the user info here
     user = cognito.get_user(
         AccessToken=accessToken
     )
 
+    # in this case our "username" is the UID we use to fetch rest of user data in our database.
     return user['Username']

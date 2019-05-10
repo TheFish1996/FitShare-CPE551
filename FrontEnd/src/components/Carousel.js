@@ -15,18 +15,18 @@ const pt3 = require("../img/pt-3.jpg")
 const items = [
   {
     src: pt1,
-    altText: "Slide 1",
-    caption: "Slide 1"
+    altText: "FitShare bridges the gap between trainers and trainees",
+    caption: "Expanding clientele from a 20 minute radius to a 20,000 mile radius."
   },
   {
     src: pt2,
-    altText: "Slide 2",
-    caption: "Slide 2"
+    altText: "Take your trainer anywhere, order a customized plan, message your trainer, show them your progress",
+    caption: "Unclutter your email and have one central hub for all of your clientele"
   },
   {
     src: pt3,
-    altText: "Slide 3",
-    caption: "Slide 3"
+    altText: "Expand your business",
+    caption: "FitShare does not plan to eliminate personal training, but instead offer a new stream of revenue for personal trainers."
   }
 ];
 
@@ -84,8 +84,9 @@ class CarouselComponent extends Component {
         >
           <img src={item.src} alt={item.altText} />
           <CarouselCaption
+            className = "bg-dark text-white" 
             captionText={item.caption}
-            captionHeader={item.caption}
+            captionHeader={item.altText}
           />
         </CarouselItem>
       );
