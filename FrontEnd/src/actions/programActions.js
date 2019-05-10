@@ -42,16 +42,17 @@ export function uploadProgram(formData){
         dispatch({type: "FETCHING_PROGRAMS"})
 
         try {
-            let response = fetch(`${ipAdress}/api/upload`, {
+            fetch(`${ipAdress}/api/upload`, {
                 method: 'POST',
                 body: formData
             })
-            let responseJson = await response.json()
-            console.log(responseJson)
-            dispatch({
-                type: "UPLOADED_PROGRAM",
-                payload: responseJson
-            })
+            .then(response => response.json())
+            .then(response => {
+                dispatch({
+                    type: "UPLOADED_PROGRAM",
+                    payload: response
+                })
+            });
         } catch (error) {
             console.log(error)
         }
