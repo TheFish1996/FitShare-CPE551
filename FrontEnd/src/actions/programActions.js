@@ -39,7 +39,7 @@ export function getSponsoredPrograms(){
 
 export function uploadProgram(formData){
     return async function(dispatch){
-        dispatch({type: "FETCHING_PROGRAMS"})
+        dispatch({type: "FETCHING_DATA"})
 
         try {
             fetch(`${ipAdress}/api/upload`, {

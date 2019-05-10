@@ -58,8 +58,8 @@ class HomePage extends Component {
           <Row style={{marginTop: 10}}>
             <Col xs="6" sm="4">
             {
-              trainerDetails[0] !== undefined &&
-              <TrainerCard item={trainerDetails[0]} />
+              trainerDetails[5] !== undefined &&
+              <TrainerCard item={trainerDetails[5]} />
             }
             </Col>
             <Col xs="6" sm="4">

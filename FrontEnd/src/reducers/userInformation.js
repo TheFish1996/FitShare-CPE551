@@ -33,6 +33,7 @@ function userInformation(state = userData, action){
             return {
                 ...state,
                 userData: action.payload,
+                refreshing: false
         }
         default:
             return state

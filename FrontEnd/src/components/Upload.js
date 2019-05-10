@@ -20,7 +20,8 @@ import { Redirect } from "react-router-dom";
 const mapStateToProps = (state) => {
   return {
     loggedIn: state.userInformation.loginSuccess,
-    userData: state.userInformation.userData
+    userData: state.userInformation.userData,
+    refreshingData: state.userInformation.refreshing
   };
 };
 
@@ -32,7 +33,7 @@ const mapDispatchToProps = (dispatch) => {
 
 function Upload(props){
 
-  const {userData, loggedIn} = props
+  const {userData, loggedIn, refreshingData} = props
   const [formData, setFormData] = useState({
     Name: userData.name,
     programName: "",
@@ -171,6 +172,14 @@ function Upload(props){
               <Button>Submit</Button>
           </Col>
         </Form>
+        {
+          refreshingData &&
+          <FormGroup >
+            <Col style={{display: "flex", justifyContent: "center"}}>
+              <Spinner color="primary" style={{ width: '4rem', height: '4rem'}} />
+            </Col>
+          </FormGroup>
+        }
       </Container>
     </div>
   )
